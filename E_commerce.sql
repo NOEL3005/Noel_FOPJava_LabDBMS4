@@ -158,7 +158,7 @@ customers.cus_id=orders.cus_id;
 select cus_name
 from customers
 left join orders on customers.cus_id= orders.cus_id
-where ord_id is null;
+where ord_id ;
 
 select  cat_name
 from products
@@ -195,6 +195,17 @@ on
 customers.cus_id= orders.cus_id
 where
 cus_name='AAKASH';
+
+SELECT c.cat_id, c.cat_name, p.pro_name, sp.supp_price
+FROM Category c
+JOIN Products p ON c.cat_id = p.cat_id
+JOIN Suppliers_Pricing sp ON p.pro_id = sp.pro_id
+WHERE sp.supp_price = (
+    SELECT MIN(supp_price)
+    FROM Suppliers_Pricing
+    WHERE pro_id = p.pro_id
+)
+ORDER BY c.cat_id;
 
 select count(*)
 from customers c
