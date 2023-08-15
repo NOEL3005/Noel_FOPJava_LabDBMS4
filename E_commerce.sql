@@ -174,6 +174,13 @@ select cus_city, count(*)
 from customers
 group by cus_city;
 
+SELECT o.ord_id, p.pro_name
+FROM Orders o
+JOIN Customers c ON o.cus_id = c.cus_id
+JOIN Suppliers_Pricing sp ON o.pricing_id = sp.pricing_id
+JOIN Products p ON sp.pro_id = p.pro_id
+WHERE c.cus_id = 2;
+
 select cus_city, count(*)
 from customers
 group by cus_city
